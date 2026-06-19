@@ -14,6 +14,47 @@
         <h1>小马识字乐园</h1>
         <span class="sparkle">✦</span>
       </div>
+    </header>
+
+    <main class="stage">
+      <div id="cardStack" class="card-stack">
+        <div id="card" class="card">
+          <div class="card-inner">
+            <div class="left-col">
+              <div class="pinyin-box" id="pinyinBox">pīn yīn</div>
+              <div class="tianzi">
+                <div class="tianzi-grid">
+                  <div class="hanzi" id="hanzi">字</div>
+                </div>
+              </div>
+              <div class="bihui-box">
+                <span class="bihui-label">笔顺</span>
+                <span class="bihui-text" id="bihui">一 丿</span>
+              </div>
+            </div>
+            <div class="right-col">
+              <div class="pic-wrap">
+                <img id="wordPic" src="" alt="" />
+              </div>
+              <div class="info-rows">
+                <div class="info-row">
+                  <span class="info-label cizu">组词</span>
+                  <span class="info-text" id="cizu">石头 山石</span>
+                </div>
+                <div class="info-row">
+                  <span class="info-label zaoju">造句</span>
+                  <span class="info-text" id="zaoju">雨花石是一种漂亮的石头。</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="card-bg-hint" id="cardBgHint"></div>
+        </div>
+      </div>
+      <div class="pony-quotes" id="ponyQuotes"></div>
+    </main>
+
+    <footer class="bottom-bar">
       <div class="progress-wrap">
         <div class="progress-label">
           <span id="dayLabel">第 1 组</span>
@@ -23,49 +64,7 @@
           <div id="progressFill" class="progress-fill"></div>
         </div>
       </div>
-    </header>
-
-    <main class="stage">
-      <div id="cardStack" class="card-stack">
-        <div id="card" class="card">
-          <div class="card-inner">
-            <div class="pinyin-row">
-              <span class="pinyin" id="pinyin">pīn yīn</span>
-              <span class="review-tag" id="reviewTag">⭐ 复习</span>
-            </div>
-            <div class="tianzi">
-              <div class="tianzi-grid">
-                <div class="hanzi" id="hanzi">字</div>
-              </div>
-            </div>
-            <div class="meaning" id="meaning">组词</div>
-          </div>
-        </div>
-        <div class="card-bg-hint" id="cardBgHint"></div>
-      </div>
-
-      <div class="pony-quotes" id="ponyQuotes"></div>
-    </main>
-
-    <button id="btnStats" class="floating-btn" title="学习进度">📊</button>
-
-    <div id="statsPanel" class="panel hidden">
-      <div class="panel-inner">
-        <h2>学习进度</h2>
-        <div class="stats-grid">
-          <div class="stat-card"><div class="stat-num" id="statTotal">0</div><div class="stat-label">认识的字</div></div>
-          <div class="stat-card"><div class="stat-num" id="statDays">0</div><div class="stat-label">学习天数</div></div>
-          <div class="stat-card"><div class="stat-num" id="statStreak">0</div><div class="stat-label">连续打卡</div></div>
-          <div class="stat-card"><div class="stat-num" id="statGroup">1</div><div class="stat-label">当前组</div></div>
-        </div>
-        <h3>最近学的字</h3>
-        <div id="recentWords" class="recent-words"></div>
-        <div class="panel-btns">
-          <button id="btnCloseStats" class="tab-btn active">关闭</button>
-          <button id="btnReset" class="tab-btn danger">重新开始</button>
-        </div>
-      </div>
-    </div>
+    </footer>
   </div>
 
   <script src="words.js"></script>

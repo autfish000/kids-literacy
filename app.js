@@ -5,7 +5,6 @@
 const WORDS_PER_GROUP = 5;
 const STORAGE_KEY = 'pony-literacy-v3';
 const REVIEW_INTERVALS = [1, 3, 7, 14, 30];
-const MASTERED_LEVEL = REVIEW_INTERVALS.length;
 const SWIPE_THRESHOLD = 80;
 
 const PONY_QUOTES = [
@@ -32,14 +31,13 @@ function loadState() {
 
 function saveState() { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); }
 
-// 选字：按组顺序 + 到期复习字混入
 function buildGroupQueue(groupIdx) {
   const queue = [];
   // 1~2 个复习字
   const toReview = [];
   for (const char in state.words) {
     const info = state.words[char];
-    if (info.level >= MASTERED_LEVEL) continue;
+    if (info.level >= REVIEW_INTERVALS.length) continue;
     const days = new Date() - new Date(info.lastShown);
     const interval = REVIEW_INTERVALS[Math.min(info.level, REVIEW_INTERVALS.length - 1)];
     if (Math.floor(days / 86400000) >= interval) toReview.push(char);
@@ -48,7 +46,6 @@ function buildGroupQueue(groupIdx) {
     const w = WORD_LIBRARY.find(w => w.char === char);
     if (w) queue.push({ ...w, isReview: true });
   });
-  // 补齐新词
   const need = WORDS_PER_GROUP - queue.length;
   const baseStart = groupIdx * WORDS_PER_GROUP;
   for (let i = 0; i < need; i++) {
@@ -71,48 +68,64 @@ const el = {
   card: document.getElementById('card'),
   cardInner: document.querySelector('.card-inner'),
   bgHint: document.getElementById('cardBgHint'),
+  pinyinBox: document.getElementById('pinyinBox'),
+  hanzi: document.getElementById('hanzi'),
+  bihui: document.getElementById('bihui'),
+  cizu: document.getElementById('cizu'),
+  zaoju: document.getElementById('zaoju'),
+  wordPic: document.getElementById('wordPic'),
   progressFill: document.getElementById('progressFill'),
   sessionProgress: document.getElementById('sessionProgress'),
   dayLabel: document.getElementById('dayLabel'),
   ponyQuotes: document.getElementById('ponyQuotes'),
-  btnStats: document.getElementById('btnStats'),
-  statsPanel: document.getElementById('statsPanel'),
-  btnCloseStats: document.getElementById('btnCloseStats'),
-  btnReset: document.getElementById('btnReset'),
-  statTotal: document.getElementById('statTotal'),
-  statDays: document.getElementById('statDays'),
-  statStreak: document.getElementById('statStreak'),
-  statGroup: document.getElementById('statGroup'),
-  recentWords: document.getElementById('recentWords'),
 };
 
 // -------- 渲染 --------
 function renderWordContent(word) {
-  const cizu = (word.example || '').replace(/^组词[：:]?\s*/, '').trim();
-  el.cardInner.innerHTML = `
-    <div class="pinyin-row">
-      <span class="pinyin">${word.pinyin}</span>
-      ${word.isReview ? '<span class="review-tag">⭐ 复习</span>' : ''}
-    </div>
-    <div class="tianzi">
-      <div class="tianzi-grid"><div class="hanzi">${word.char}</div></div>
-    </div>
-    <div class="meaning">${cizu}</div>
-  `;
+  // 拼音
+  el.pinyinBox.textContent = word.pinyin || '';
+
+  // 汉字
+  el.hanzi.textContent = word.char || '';
+
+  // 笔顺：优先使用 stroke 字段；如果没有则用构造序列
+  let strokeText = (word.stroke && word.stroke.trim()) || '';
+  if (!strokeText) {
+    // 没有笔顺数据 → 简化显示"见汉字"
+    strokeText = `${word.char} · 按汉字顺序书写`;
+  }
+  el.bihui.textContent = strokeText;
+
+  // 组词：从 example 里提取词语部分
+  const cizuRaw = (word.example || '').replace(/^组词[：:]?\s*/, '').trim();
+  el.cizu.textContent = cizuRaw || word.char;
+
+  // 造句：优先使用 sentence 字段
+  let sentence = (word.sentence && word.sentence.trim()) || '';
+  if (!sentence) {
+    const firstWord = cizuRaw.split(/[、,，]/)[0] || word.char;
+    sentence = `今天我们学习了“${firstWord}”。`;
+  }
+  el.zaoju.textContent = sentence;
+
+  // 图片：优先使用 pic 字段
+  if (el.wordPic) {
+    const pic = word.pic || `https://picsum.photos/seed/${encodeURIComponent(word.char)}/400/300`;
+    el.wordPic.src = pic;
+    el.wordPic.alt = word.char;
+  }
+
+  // 清除边界提示
   el.card.classList.remove('boundary-next', 'boundary-prev');
   if (el.bgHint) {
     el.bgHint.classList.remove('show-next', 'show-prev');
     el.bgHint.innerHTML = '';
   }
-  if (word.isReview) el.card.classList.add('is-review');
-  else el.card.classList.remove('is-review');
 }
 
 function renderBoundaryHint(kind) {
   if (!el.bgHint) return;
   if (kind === 'next') {
-    el.card.classList.add('boundary-next');
-    el.card.classList.remove('boundary-prev', 'is-review');
     el.bgHint.innerHTML = `
       <div class="bg-arrow">👉</div>
       <div class="bg-title">进入下一组</div>
@@ -121,8 +134,6 @@ function renderBoundaryHint(kind) {
     el.bgHint.classList.add('show-next');
     el.bgHint.classList.remove('show-prev');
   } else if (kind === 'prev') {
-    el.card.classList.add('boundary-prev');
-    el.card.classList.remove('boundary-next', 'is-review');
     el.bgHint.innerHTML = `
       <div class="bg-arrow">👈</div>
       <div class="bg-title">回到上一组</div>
@@ -134,7 +145,6 @@ function renderBoundaryHint(kind) {
 }
 
 function clearBoundaryHint() {
-  el.card.classList.remove('boundary-next', 'boundary-prev');
   if (el.bgHint) {
     el.bgHint.classList.remove('show-next', 'show-prev');
     el.bgHint.innerHTML = '';
@@ -170,7 +180,7 @@ function showRandomPonyQuote() {
 function markWordShown(word) {
   const info = state.words[word.char] || { level: 0, lastShown: null, timesShown: 0 };
   info.timesShown = (info.timesShown || 0) + 1;
-  info.level = Math.min(MASTERED_LEVEL, (info.level || 0) + 1);
+  info.level = Math.min(REVIEW_INTERVALS.length, (info.level || 0) + 1);
   info.lastShown = new Date().toISOString().slice(0, 10);
   state.words[word.char] = info;
 
@@ -251,7 +261,7 @@ function onPointerMove(e) {
   if (!dragging) return;
   const p = e.touches ? e.touches[0] : e;
   const dx = p.clientX - pointerStartX;
-  const rot = dx / 20;
+  const rot = dx / 40;
   el.card.style.transform = `translateX(${dx}px) rotate(${rot}deg)`;
   if (e.cancelable && Math.abs(dx) > 4) e.preventDefault();
 
@@ -278,9 +288,6 @@ function onPointerUp() {
   dragging = false;
   el.card.style.transition = '';
 
-  // 计算位移（用 transform 字符串或通过 pointer 记录的差）
-  // 简单方式：通过当前 transform 推断 - 改为用上次 pointerMove 的差
-  // 这里直接取 transform 的 translateX：
   const m = /translateX\((-?\d+(?:\.\d+)?)px\)/.exec(el.card.style.transform || '');
   const dx = m ? parseFloat(m[1]) : 0;
 
@@ -316,47 +323,16 @@ window.addEventListener('mousemove', (e) => {
 });
 window.addEventListener('mouseup', onPointerUp);
 
-// -------- 统计面板 --------
-el.btnStats.addEventListener('click', () => {
-  el.statTotal.textContent = Object.keys(state.words).length;
-  el.statDays.textContent = state.history.length;
-  el.statStreak.textContent = state.streak;
-  el.statGroup.textContent = state.groupIndex + 1;
-  el.recentWords.innerHTML = '';
-  const recent = [];
-  for (let i = state.history.length - 1; i >= 0 && recent.length < 25; i++) {
-    for (const c of state.history[i].words) if (!recent.includes(c)) recent.push(c);
-  }
-  recent.slice(0, 25).forEach(c => {
-    const s = document.createElement('span');
-    s.textContent = c;
-    el.recentWords.appendChild(s);
-  });
-  if (!recent.length) el.recentWords.innerHTML = '<span style="font-size:13px;width:auto;height:auto;padding:8px;">还没学过字哦~</span>';
-  el.statsPanel.classList.remove('hidden');
-});
-
-el.btnCloseStats.addEventListener('click', () => el.statsPanel.classList.add('hidden'));
-el.btnReset.addEventListener('click', () => {
-  if (confirm('确定要重新开始吗？所有进度都会清掉。')) {
-    state = defaultState();
-    saveState();
-    currentQueue = buildGroupQueue(state.groupIndex);
-    currentIdx = 0;
-    renderCurrent();
-    el.statsPanel.classList.add('hidden');
-  }
-});
-
-// 键盘测试
+// 键盘
 document.addEventListener('keydown', (e) => {
-  if (!el.statsPanel.classList.contains('hidden')) return;
-  if (e.key === 'ArrowLeft') {
-    if (currentIdx >= currentQueue.length - 1) goNextGroup();
-    else handleNextWord();
-  } else if (e.key === 'ArrowRight') {
-    if (currentIdx === 0) goPrevGroup();
-    else handlePrevWord();
+  if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') {
+    if (e.key === 'ArrowLeft') {
+      if (currentIdx >= currentQueue.length - 1) goNextGroup();
+      else handleNextWord();
+    } else {
+      if (currentIdx === 0) goPrevGroup();
+      else handlePrevWord();
+    }
   }
 });
 
