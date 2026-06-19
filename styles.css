@@ -414,8 +414,11 @@ html, body {
 }
 
 @media (orientation: portrait) {
-  .card-stack { max-width: 480px; }
-  .main-row { flex-direction: column; }
+  .app { overflow-y: auto; }
+  .stage { justify-content: flex-start; padding-top: 16px; }
+  .card-stack { max-width: 480px; height: auto; max-height: none; }
+  .card { position: relative; inset: auto; height: auto; }
+  .main-row { flex-direction: column; flex: 0 0 auto; }
   .left-section, .right-section { width: 100%; flex: none; }
   .left-section { order: 1; }
   .right-section { order: 2; }
