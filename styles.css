@@ -1,11 +1,9 @@
 :root {
   --card-bg: #fdece4;
   --card-border: #e8a5c0;
-  --card-border-width: 3px;
   --tianzi-color: #e8a5c0;
   --text-dark: #4a3458;
   --label-cizu: #6fc8d4;
-  --label-zaoju: #ff8fa3;
   --label-bihui: #ffb69e;
 }
 
@@ -19,9 +17,7 @@ html, body {
   padding: 0;
   height: 100%;
   font-family: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", Arial, sans-serif;
-  background:
-    url("bg-pattern.svg") repeat,
-    linear-gradient(160deg, #fff5f0 0%, #ffeef6 50%, #fff0f5 100%);
+  background: linear-gradient(160deg, #fff5f0 0%, #ffeef6 50%, #fff0f5 100%);
   color: var(--text-dark);
   overflow: hidden;
   user-select: none;
@@ -38,7 +34,7 @@ html, body {
 }
 
 .top-bar {
-  padding: 6px 16px 4px;
+  padding: 8px 20px 6px;
   text-align: center;
   z-index: 5;
   flex-shrink: 0;
@@ -53,7 +49,7 @@ html, body {
 
 .title h1 {
   margin: 0;
-  font-size: 18px;
+  font-size: 20px;
   font-weight: 800;
   background: linear-gradient(90deg, #ff6fb3, #c98cff);
   -webkit-background-clip: text;
@@ -85,31 +81,30 @@ html, body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 8px 16px 8px;
+  padding: 10px 20px 10px;
   z-index: 2;
   min-height: 0;
 }
 
 .card-stack {
   position: relative;
-  width: 800px;
-  max-width: none;
-  height: auto;
-  max-height: none;
+  width: 100%;
+  max-width: 400px;
+  height: 100%;
+  max-height: 580px;
   perspective: 1200px;
 }
 
 .card {
-  position: relative;
-  width: 800px;
-  height: auto;
+  position: absolute;
+  inset: 0;
   background: var(--card-bg);
-  border-radius: 16px;
-  box-shadow: 0 8px 25px rgba(232, 165, 192, 0.3);
-  border: var(--card-border-width) solid var(--card-border);
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(232, 165, 192, 0.3);
+  border: 3px solid var(--card-border);
   display: flex;
   flex-direction: column;
-  padding: 16px;
+  padding: 20px 20px 16px;
   cursor: grab;
   transition: transform 0.3s ease, opacity 0.3s ease;
   touch-action: none;
@@ -118,12 +113,12 @@ html, body {
 
 .card:active { cursor: grabbing; }
 
-.card.swipe-right { transform: translateX(120%) rotate(8deg) scale(0.92); opacity: 0; }
-.card.swipe-left  { transform: translateX(-120%) rotate(-8deg) scale(0.92); opacity: 0; }
+.card.swipe-right { transform: translateX(120%) rotate(10deg) scale(0.92); opacity: 0; }
+.card.swipe-left  { transform: translateX(-120%) rotate(-10deg) scale(0.92); opacity: 0; }
 .card.fly-in      { animation: flyIn 0.45s cubic-bezier(0.34, 1.56, 0.64, 1); }
 
 @keyframes flyIn {
-  from { transform: translateY(30px) scale(0.96); opacity: 0; }
+  from { transform: translateY(40px) scale(0.94); opacity: 0; }
   to   { transform: translateY(0) scale(1); opacity: 1; }
 }
 
@@ -131,41 +126,16 @@ html, body {
   flex: 1;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  align-items: center;
+  gap: 12px;
   min-height: 0;
-}
-
-.top-row {
-  display: flex;
-  gap: 14px;
-}
-
-.bottom-row {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.left-section {
-  width: 300px;
-  flex: none;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.right-section {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  min-width: 0;
 }
 
 .pinyin-box {
   background: #fff;
   border: 2px solid var(--tianzi-color);
-  border-radius: 8px;
-  padding: 8px 14px;
+  border-radius: 10px;
+  padding: 10px 20px;
   text-align: center;
   font-size: 32px;
   font-weight: 600;
@@ -173,7 +143,9 @@ html, body {
   letter-spacing: 4px;
   font-family: "Arial", "Helvetica", sans-serif;
   position: relative;
-  min-height: 56px;
+  min-height: 58px;
+  width: 100%;
+  max-width: 320px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -183,33 +155,30 @@ html, body {
 .pinyin-box::after {
   content: "";
   position: absolute;
-  left: 8px; right: 8px;
+  left: 10px; right: 10px;
   border-top: 1px dashed var(--tianzi-color);
   pointer-events: none;
 }
 
-.pinyin-box::before {
-  top: 35%;
-}
-
-.pinyin-box::after {
-  top: 65%;
-}
+.pinyin-box::before { top: 33%; }
+.pinyin-box::after  { top: 66%; }
 
 .tianzi {
+  flex: 1;
   display: flex;
   justify-content: center;
   align-items: center;
+  min-height: 0;
+  width: 100%;
 }
 
 .tianzi-grid {
   position: relative;
-  width: 100%;
-  height: auto;
-  aspect-ratio: 1 / 1;
+  width: 240px;
+  height: 240px;
   background: #fff;
   border: 2px solid var(--tianzi-color);
-  border-radius: 4px;
+  border-radius: 6px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -242,7 +211,7 @@ html, body {
   justify-content: center;
   font-family: "宋体", "SimSun", "STSong", serif;
   font-weight: 400;
-  font-size: 150px;
+  font-size: 160px;
   color: #111;
   margin: 0;
   animation: pop 0.6s ease-out;
@@ -256,24 +225,9 @@ html, body {
   100% { transform: scale(1); opacity: 1; }
 }
 
-.pic-wrap {
-  flex: 1;
-  background: #fff;
-  border: 2px solid var(--tianzi-color);
-  border-radius: 8px;
-  padding: 8px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 250px;
-  overflow: hidden;
-}
-
-.pic-wrap img {
-  max-width: 100%;
-  max-height: 100%;
-  object-fit: contain;
-  display: block;
+.cizu-box {
+  width: 100%;
+  max-width: 320px;
 }
 
 .info-row {
@@ -282,30 +236,28 @@ html, body {
   gap: 10px;
   background: #fff;
   border: 2px solid var(--tianzi-color);
-  border-radius: 8px;
-  padding: 8px 10px;
+  border-radius: 10px;
+  padding: 10px 14px;
 }
 
 .info-label {
   flex-shrink: 0;
-  min-width: 52px;
+  min-width: 54px;
   text-align: center;
   color: #fff;
-  padding: 4px 10px;
+  padding: 5px 12px;
   border-radius: 6px;
-  font-size: 14px;
+  font-size: 15px;
   font-weight: 700;
   letter-spacing: 1px;
 }
 
-.info-label.cizu   { background: var(--label-cizu); }
-.info-label.zaoju  { background: var(--label-zaoju); }
+.info-label.cizu { background: var(--label-cizu); }
 
 .info-text {
   flex: 1;
-  font-size: 16px;
+  font-size: 18px;
   color: #333;
-  line-height: 1.4;
   font-weight: 600;
   text-align: left;
 }
@@ -316,17 +268,19 @@ html, body {
   gap: 10px;
   background: #fff;
   border: 2px solid var(--tianzi-color);
-  border-radius: 8px;
-  padding: 8px 12px;
+  border-radius: 10px;
+  padding: 10px 14px;
+  width: 100%;
+  max-width: 320px;
 }
 
 .bihui-label {
   flex-shrink: 0;
   background: var(--label-bihui);
   color: #fff;
-  padding: 4px 12px;
+  padding: 5px 12px;
   border-radius: 6px;
-  font-size: 14px;
+  font-size: 15px;
   font-weight: 700;
   letter-spacing: 1px;
 }
@@ -334,7 +288,7 @@ html, body {
 .bihui-text {
   flex: 1;
   font-family: "宋体", "SimSun", serif;
-  font-size: 24px;
+  font-size: 26px;
   color: #333;
   letter-spacing: 6px;
   text-align: left;
@@ -351,54 +305,54 @@ html, body {
   justify-content: center;
   flex-direction: column;
   gap: 8px;
-  font-size: 20px;
+  font-size: 22px;
   font-weight: 800;
   letter-spacing: 3px;
   color: #b85a1a;
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.25s ease;
-  border-radius: 16px;
+  border-radius: 20px;
   text-align: center;
-  padding: 0 20px;
+  padding: 0 24px;
   z-index: 1;
-  background: rgba(255, 248, 232, 0.92);
+  background: rgba(255, 248, 232, 0.93);
 }
 
 .card-bg-hint.show-next { opacity: 1; }
-.card-bg-hint.show-prev { opacity: 1; color: #2a5a80; background: rgba(200, 233, 255, 0.92); }
-.card-bg-hint .bg-arrow { font-size: 40px; }
-.card-bg-hint .bg-title { font-size: 18px; }
-.card-bg-hint .bg-sub { font-size: 12px; opacity: 0.75; }
+.card-bg-hint.show-prev { opacity: 1; color: #2a5a80; background: rgba(200, 233, 255, 0.93); }
+.card-bg-hint .bg-arrow { font-size: 44px; }
+.card-bg-hint .bg-title { font-size: 20px; }
+.card-bg-hint .bg-sub { font-size: 13px; opacity: 0.75; }
 
-.pony-quotes { margin-top: 8px; font-size: 11px; color: #8a7a9a; text-align: center; min-height: 14px; }
+.pony-quotes { margin-top: 10px; font-size: 12px; color: #8a7a9a; text-align: center; min-height: 16px; }
 
 .bottom-bar {
-  padding: 6px 16px 12px;
+  padding: 8px 20px 16px;
   z-index: 5;
   flex-shrink: 0;
 }
 
 .progress-wrap {
-  max-width: 920px;
+  max-width: 400px;
   margin: 0 auto;
-  background: rgba(255, 255, 255, 0.8);
-  border-radius: 12px;
-  padding: 6px 12px;
+  background: rgba(255, 255, 255, 0.85);
+  border-radius: 14px;
+  padding: 8px 14px;
   box-shadow: 0 4px 15px rgba(201, 140, 255, 0.2);
 }
 
 .progress-label {
   display: flex;
   justify-content: space-between;
-  font-size: 12px;
+  font-size: 13px;
   font-weight: 700;
   color: #4a3458;
-  margin-bottom: 3px;
+  margin-bottom: 4px;
 }
 
 .progress-bar {
-  height: 8px;
+  height: 10px;
   background: #f3e4ff;
   border-radius: 16px;
   overflow: hidden;
@@ -412,34 +366,22 @@ html, body {
   transition: width 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
-@media (orientation: portrait) {
-  .app { overflow-y: auto; }
-  .stage { justify-content: flex-start; padding-top: 16px; }
+@media (max-height: 650px) {
+  .tianzi-grid { width: 200px; height: 200px; }
+  .hanzi { font-size: 135px; }
+  .pinyin-box { font-size: 28px; max-width: 280px; }
+  .cizu-box, .bihui-bar { max-width: 280px; }
+  .info-text { font-size: 16px; }
+  .bihui-text { font-size: 22px; letter-spacing: 4px; }
 }
 
-@media (max-height: 500px), (max-width: 700px) {
-  .top-bar { padding: 4px 10px; }
-  .title h1 { font-size: 14px; }
-  .stage { padding: 4px 12px; }
-  .card { padding: 10px; border-radius: 12px; }
-  .card-inner { gap: 6px; }
-  .top-row { gap: 10px; }
-  .hanzi { font-size: 100px; }
-  .pinyin-box { font-size: 22px; padding: 6px 10px; }
-  .pic-wrap { min-height: 100px; }
-  .info-row { padding: 6px 8px; }
-  .info-label { font-size: 12px; padding: 3px 8px; min-width: 45px; }
-  .info-text { font-size: 14px; }
-  .bihui-bar { padding: 6px 10px; }
-  .bihui-label { font-size: 12px; padding: 3px 10px; }
+@media (max-height: 550px) {
+  .tianzi-grid { width: 170px; height: 170px; }
+  .hanzi { font-size: 115px; }
+  .pinyin-box { font-size: 24px; padding: 8px 16px; max-width: 260px; }
+  .cizu-box, .bihui-bar { max-width: 260px; }
+  .info-text { font-size: 15px; }
   .bihui-text { font-size: 20px; letter-spacing: 4px; }
-  .bottom-bar { padding: 4px 12px 8px; }
-  .progress-wrap { padding: 4px 10px; }
-}
-
-@media (min-width: 1000px) {
-  .hanzi { font-size: 180px; }
-  .pinyin-box { font-size: 38px; }
-  .bihui-text { font-size: 28px; letter-spacing: 8px; }
-  .info-text { font-size: 18px; }
+  .card { padding: 14px 16px 10px; }
+  .card-inner { gap: 8px; }
 }

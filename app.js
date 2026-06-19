@@ -60,14 +60,11 @@ let currentIdx = 0;
 
 const el = {
   card: document.getElementById('card'),
-  cardInner: document.querySelector('.card-inner'),
   bgHint: document.getElementById('cardBgHint'),
   pinyinBox: document.getElementById('pinyinBox'),
   hanzi: document.getElementById('hanzi'),
   bihui: document.getElementById('bihui'),
-  cizu1: document.getElementById('cizu1'),
-  zaoju: document.getElementById('zaoju'),
-  wordPic: document.getElementById('wordPic'),
+  cizu: document.getElementById('cizu'),
   progressFill: document.getElementById('progressFill'),
   sessionProgress: document.getElementById('sessionProgress'),
   dayLabel: document.getElementById('dayLabel'),
@@ -86,28 +83,7 @@ function renderWordContent(word) {
 
   const cizuRaw = (word.example || '').replace(/^组词[：:]?\s*/, '').trim();
   const cizuParts = cizuRaw.split(/[、,，]/).map(s => s.trim()).filter(s => s);
-  
-  if (cizuParts.length >= 3) {
-    el.cizu1.textContent = cizuParts.slice(0, 3).join(' ');
-  } else if (cizuParts.length >= 1) {
-    el.cizu1.textContent = cizuParts.join(' ');
-  } else {
-    el.cizu1.textContent = word.char;
-  }
-
-  let sentence = (word.sentence && word.sentence.trim()) || '';
-  if (!sentence) {
-    const firstWord = cizuParts[0] || word.char;
-    sentence = `我喜欢${firstWord}。`;
-  }
-  el.zaoju.textContent = sentence;
-
-  if (el.wordPic) {
-    const firstWord = cizuParts[0] || word.char;
-    const pic = `https://picsum.photos/seed/${encodeURIComponent(firstWord)}/400/300`;
-    el.wordPic.src = pic;
-    el.wordPic.alt = firstWord;
-  }
+  el.cizu.textContent = cizuParts.length >= 1 ? cizuParts.slice(0, 3).join('  ') : word.char;
 
   el.card.classList.remove('boundary-next', 'boundary-prev');
   if (el.bgHint) {
@@ -202,10 +178,7 @@ function handleNextWord() {
 }
 
 function handlePrevWord() {
-  if (currentIdx === 0) {
-    renderBoundaryHint('prev');
-    return;
-  }
+  if (currentIdx === 0) { renderBoundaryHint('prev'); return; }
   currentIdx--;
   renderCurrent();
   animateFlyIn();
@@ -222,12 +195,7 @@ function goNextGroup() {
 }
 
 function goPrevGroup() {
-  if (state.groupIndex <= 0) {
-    currentIdx = 0;
-    renderCurrent();
-    animateFlyIn();
-    return;
-  }
+  if (state.groupIndex <= 0) { currentIdx = 0; renderCurrent(); animateFlyIn(); return; }
   state.groupIndex -= 1;
   currentQueue = buildGroupQueue(state.groupIndex);
   currentIdx = 0;
@@ -308,22 +276,12 @@ el.card.addEventListener('touchstart', onPointerDown, { passive: false });
 el.card.addEventListener('touchmove', onPointerMove, { passive: false });
 el.card.addEventListener('touchend', onPointerUp);
 el.card.addEventListener('mousedown', onPointerDown);
-window.addEventListener('mousemove', (e) => {
-  if (!dragging) return;
-  onPointerMove(e);
-});
+window.addEventListener('mousemove', (e) => { if (!dragging) return; onPointerMove(e); });
 window.addEventListener('mouseup', onPointerUp);
 
 document.addEventListener('keydown', (e) => {
-  if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') {
-    if (e.key === 'ArrowLeft') {
-      if (currentIdx >= currentQueue.length - 1) goNextGroup();
-      else handleNextWord();
-    } else {
-      if (currentIdx === 0) goPrevGroup();
-      else handlePrevWord();
-    }
-  }
+  if (e.key === 'ArrowLeft') { if (currentIdx >= currentQueue.length - 1) goNextGroup(); else handleNextWord(); }
+  else if (e.key === 'ArrowRight') { if (currentIdx === 0) goPrevGroup(); else handlePrevWord(); }
 });
 
 renderCurrent();
