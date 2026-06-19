@@ -1,21 +1,11 @@
 :root {
-  /* 小马宝莉配色 */
   --mlp-pink: #ff4fa3;
-  --mlp-pink-soft: #ff9fc7;
   --mlp-purple: #9b4de0;
-  --mlp-purple-soft: #c9a5ff;
   --mlp-blue: #4a8bff;
-  --mlp-blue-soft: #a5c4ff;
   --mlp-yellow: #ffd23f;
-  --mlp-yellow-soft: #ffe98a;
   --mlp-green: #7fd96b;
-  --mlp-white: #fffafc;
-  --mlp-cream: #fff5fa;
-
   --tianzi-color: #ff9fc7;
   --text-dark: #4a2860;
-  --label-cizu: #7fd96b;
-  --label-bihui: #ffd23f;
 }
 
 * {
@@ -27,15 +17,13 @@ html, body {
   margin: 0;
   padding: 0;
   height: 100%;
-  font-family: "KaiTi", "楷体", "STKaiti", "华文楷体", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", serif;
-  /* 双层背景：顶部渐变 + 独角兽散点底纹 */
+  font-family: "Roboto", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
   background:
     radial-gradient(ellipse at 10% 8%, rgba(255, 159, 199, 0.55) 0%, transparent 40%),
     radial-gradient(ellipse at 90% 12%, rgba(201, 165, 255, 0.55) 0%, transparent 40%),
     radial-gradient(ellipse at 85% 95%, rgba(165, 196, 255, 0.5) 0%, transparent 40%),
     radial-gradient(ellipse at 15% 90%, rgba(255, 233, 138, 0.4) 0%, transparent 40%),
     linear-gradient(160deg, #fff5fa 0%, #fbeaff 50%, #eef5ff 100%);
-  /* 独角兽底纹：星星 / 心形 / 菱形，小而稀疏的图案 */
   background-image:
     url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220' viewBox='0 0 220 220'><text x='10' y='28' font-size='18' fill='%23ffd23f' opacity='0.25'>★</text><text x='160' y='40' font-size='14' fill='%23ff4fa3' opacity='0.22'>✦</text><text x='100' y='60' font-size='12' fill='%239b4de0' opacity='0.20'>◆</text><text x='40' y='100' font-size='16' fill='%234a8bff' opacity='0.22'>♡</text><text x='180' y='120' font-size='14' fill='%23ff9fc7' opacity='0.22'>✦</text><text x='120' y='140' font-size='16' fill='%237fd96b' opacity='0.20'>★</text><text x='20' y='170' font-size='14' fill='%23c9a5ff' opacity='0.22'>◆</text><text x='150' y='180' font-size='12' fill='%23ffd23f' opacity='0.25'>♡</text><text x='70' y='200' font-size='14' fill='%234a8bff' opacity='0.22'>✦</text></svg>"),
     radial-gradient(ellipse at 10% 8%, rgba(255, 159, 199, 0.55) 0%, transparent 40%),
@@ -59,7 +47,6 @@ html, body {
   overflow: hidden;
 }
 
-/* -------- 顶部标题 -------- */
 .top-bar {
   padding: 10px 20px 8px;
   text-align: center;
@@ -76,7 +63,7 @@ html, body {
 
 .title h1 {
   margin: 0;
-  font-size: 24px;
+  font-size: 22px;
   font-weight: 700;
   letter-spacing: 4px;
   background: linear-gradient(90deg, #ff4fa3 0%, #9b4de0 50%, #4a8bff 100%);
@@ -86,7 +73,7 @@ html, body {
 }
 
 .sparkle {
-  font-size: 18px;
+  font-size: 16px;
   color: #ff4fa3;
   animation: twinkle 2.4s ease-in-out infinite;
 }
@@ -101,7 +88,6 @@ html, body {
   50% { transform: scale(1.3) rotate(20deg); opacity: 0.6; }
 }
 
-/* -------- 舞台 -------- */
 .stage {
   flex: 1;
   position: relative;
@@ -123,7 +109,6 @@ html, body {
   perspective: 1200px;
 }
 
-/* 识字卡：无边框，柔和阴影 + 粉紫色渐变 */
 .card {
   position: absolute;
   inset: 0;
@@ -165,26 +150,31 @@ html, body {
   min-height: 0;
 }
 
-/* 拼音格（楷体） */
+/* 田字格 + 拼音格 统一宽度 */
+.tianzi-grid,
+.pinyin-box {
+  width: 240px;
+}
+
+/* 拼音格 — Roboto 字体 */
 .pinyin-box {
   background: #ffffff;
   border: 2px solid var(--tianzi-color);
   border-radius: 14px;
-  padding: 10px 22px;
+  padding: 10px 16px;
   text-align: center;
-  font-size: 32px;
-  font-weight: 600;
+  font-size: 30px;
+  font-weight: 500;
   color: #9b4de0;
-  letter-spacing: 6px;
-  font-family: "KaiTi", "楷体", "STKaiti", "Arial", sans-serif;
+  letter-spacing: 5px;
+  font-family: "Roboto", sans-serif;
   position: relative;
-  min-height: 62px;
-  width: 100%;
-  max-width: 320px;
+  min-height: 58px;
   display: flex;
   align-items: center;
   justify-content: center;
   box-shadow: 0 2px 8px rgba(255, 79, 163, 0.1);
+  margin: 0 auto;
 }
 
 /* 拼音格双虚线 */
@@ -212,7 +202,6 @@ html, body {
 
 .tianzi-grid {
   position: relative;
-  width: 240px;
   height: 240px;
   background: #ffffff;
   border: 2px solid var(--tianzi-color);
@@ -221,6 +210,7 @@ html, body {
   align-items: center;
   justify-content: center;
   box-shadow: 0 4px 14px rgba(255, 79, 163, 0.15);
+  margin: 0 auto;
 }
 
 /* 田字格横竖虚线 */
@@ -243,7 +233,7 @@ html, body {
   margin-left: 0.5px;
 }
 
-/* 汉字：楷体大号 */
+/* 汉字 — 仅此处使用国标楷体 */
 .hanzi {
   position: absolute;
   inset: 0;
@@ -289,15 +279,15 @@ html, body {
   text-align: center;
   color: #fff;
   padding: 6px 14px;
-  border-radius: 10px;
-  font-size: 16px;
+  border-radius: 4px;
+  font-size: 15px;
   font-weight: 700;
-  letter-spacing: 2px;
+  letter-spacing: 1px;
 }
 
+/* 组词标签 — 扁平纯色 */
 .info-label.cizu {
-  background: linear-gradient(135deg, #7fd96b 0%, #4aa83d 100%);
-  box-shadow: 0 2px 6px rgba(127, 217, 107, 0.35);
+  background: #7fd96b;
 }
 
 .info-text {
@@ -306,7 +296,7 @@ html, body {
   color: #4a2860;
   font-weight: 600;
   text-align: left;
-  letter-spacing: 2px;
+  letter-spacing: 1px;
 }
 
 /* 笔顺 */
@@ -325,16 +315,16 @@ html, body {
 
 .bihui-label {
   flex-shrink: 0;
-  background: linear-gradient(135deg, #ffd23f 0%, #ffa629 100%);
+  background: #ffd23f;
   color: #fff;
   padding: 6px 14px;
-  border-radius: 10px;
-  font-size: 16px;
+  border-radius: 4px;
+  font-size: 15px;
   font-weight: 700;
-  letter-spacing: 2px;
-  box-shadow: 0 2px 6px rgba(255, 210, 63, 0.35);
+  letter-spacing: 1px;
 }
 
+/* 笔顺文字 — 楷体 */
 .bihui-text {
   flex: 1;
   font-family: "KaiTi", "楷体", "STKaiti", serif;
@@ -434,18 +424,18 @@ html, body {
 
 /* 响应式 */
 @media (max-height: 650px) {
-  .tianzi-grid { width: 200px; height: 200px; }
+  .tianzi-grid, .pinyin-box { width: 200px; height: 200px; }
   .hanzi { font-size: 140px; }
-  .pinyin-box { font-size: 28px; max-width: 280px; }
+  .pinyin-box { font-size: 26px; }
   .cizu-box, .bihui-bar { max-width: 280px; }
   .info-text { font-size: 18px; }
   .bihui-text { font-size: 22px; letter-spacing: 6px; }
 }
 
 @media (max-height: 550px) {
-  .tianzi-grid { width: 170px; height: 170px; }
+  .tianzi-grid, .pinyin-box { width: 170px; height: 170px; }
   .hanzi { font-size: 120px; }
-  .pinyin-box { font-size: 24px; padding: 8px 18px; max-width: 260px; min-height: 52px; }
+  .pinyin-box { font-size: 22px; padding: 8px 14px; min-height: 50px; }
   .cizu-box, .bihui-bar { max-width: 260px; }
   .info-text { font-size: 16px; }
   .bihui-text { font-size: 20px; letter-spacing: 4px; }
