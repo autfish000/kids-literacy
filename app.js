@@ -63,7 +63,6 @@ const el = {
   bgHint: document.getElementById('cardBgHint'),
   pinyinBox: document.getElementById('pinyinBox'),
   hanzi: document.getElementById('hanzi'),
-  bihui: document.getElementById('bihui'),
   cizu: document.getElementById('cizu'),
   progressFill: document.getElementById('progressFill'),
   sessionProgress: document.getElementById('sessionProgress'),
@@ -75,15 +74,13 @@ function renderWordContent(word) {
   el.pinyinBox.textContent = word.pinyin || '';
   el.hanzi.textContent = word.char || '';
 
-  let strokeText = (word.stroke && word.stroke.trim()) || '';
-  if (!strokeText) {
-    strokeText = `${word.char} · 按汉字顺序书写`;
-  }
-  el.bihui.textContent = strokeText;
-
   const cizuRaw = (word.example || '').replace(/^组词[：:]?\s*/, '').trim();
   const cizuParts = cizuRaw.split(/[、,，]/).map(s => s.trim()).filter(s => s);
-  el.cizu.textContent = cizuParts.length >= 1 ? cizuParts.slice(0, 3).join('  ') : word.char;
+  if (cizuParts.length >= 1) {
+    el.cizu.textContent = '组词：' + cizuParts.slice(0, 3).join('　');
+  } else {
+    el.cizu.textContent = word.char;
+  }
 
   el.card.classList.remove('boundary-next', 'boundary-prev');
   if (el.bgHint) {
