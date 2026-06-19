@@ -1,7 +1,5 @@
 // ==================== 小马识字乐园 · 核心逻辑 ====================
-// 左滑 = 下一个字，右滑 = 上一个字
 
-// -------- 常量 --------
 const WORDS_PER_GROUP = 5;
 const STORAGE_KEY = 'pony-literacy-v3';
 const REVIEW_INTERVALS = [1, 3, 7, 14, 30];
@@ -16,7 +14,6 @@ const PONY_QUOTES = [
   '你是识字小能手~',
 ];
 
-// -------- 工具 --------
 function defaultState() {
   return { groupIndex: 0, words: {}, lastStudyDate: null, streak: 0, history: [] };
 }
@@ -33,7 +30,6 @@ function saveState() { localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
 
 function buildGroupQueue(groupIdx) {
   const queue = [];
-  // 1~2 个复习字
   const toReview = [];
   for (const char in state.words) {
     const info = state.words[char];
@@ -58,12 +54,10 @@ function buildGroupQueue(groupIdx) {
   return queue;
 }
 
-// -------- 状态 --------
 let state = loadState();
 let currentQueue = buildGroupQueue(state.groupIndex);
 let currentIdx = 0;
 
-// -------- DOM --------
 const el = {
   card: document.getElementById('card'),
   cardInner: document.querySelector('.card-inner'),
@@ -71,7 +65,8 @@ const el = {
   pinyinBox: document.getElementById('pinyinBox'),
   hanzi: document.getElementById('hanzi'),
   bihui: document.getElementById('bihui'),
-  cizu: document.getElementById('cizu'),
+  cizu1: document.getElementById('cizu1'),
+  cizu2: document.getElementById('cizu2'),
   zaoju: document.getElementById('zaoju'),
   wordPic: document.getElementById('wordPic'),
   progressFill: document.getElementById('progressFill'),
@@ -80,42 +75,44 @@ const el = {
   ponyQuotes: document.getElementById('ponyQuotes'),
 };
 
-// -------- 渲染 --------
 function renderWordContent(word) {
-  // 拼音
   el.pinyinBox.textContent = word.pinyin || '';
-
-  // 汉字
   el.hanzi.textContent = word.char || '';
 
-  // 笔顺：优先使用 stroke 字段；如果没有则用构造序列
   let strokeText = (word.stroke && word.stroke.trim()) || '';
   if (!strokeText) {
-    // 没有笔顺数据 → 简化显示"见汉字"
     strokeText = `${word.char} · 按汉字顺序书写`;
   }
   el.bihui.textContent = strokeText;
 
-  // 组词：从 example 里提取词语部分
   const cizuRaw = (word.example || '').replace(/^组词[：:]?\s*/, '').trim();
-  el.cizu.textContent = cizuRaw || word.char;
+  const cizuParts = cizuRaw.split(/[、,，]/).map(s => s.trim()).filter(s => s);
+  
+  if (cizuParts.length >= 3) {
+    el.cizu1.textContent = cizuParts.slice(0, 3).join(' ');
+    el.cizu2.textContent = `${cizuParts[0]}是一种漂亮的${word.char}。`;
+  } else if (cizuParts.length >= 1) {
+    el.cizu1.textContent = cizuParts.join(' ');
+    el.cizu2.textContent = `${cizuParts[0]}是一种漂亮的${word.char}。`;
+  } else {
+    el.cizu1.textContent = word.char;
+    el.cizu2.textContent = `${word.char}是一个常用汉字。`;
+  }
 
-  // 造句：优先使用 sentence 字段
   let sentence = (word.sentence && word.sentence.trim()) || '';
   if (!sentence) {
-    const firstWord = cizuRaw.split(/[、,，]/)[0] || word.char;
-    sentence = `今天我们学习了“${firstWord}”。`;
+    const firstWord = cizuParts[0] || word.char;
+    sentence = `雨花${word.char}是一种漂亮的${word.char}头。`;
   }
   el.zaoju.textContent = sentence;
 
-  // 图片：优先使用 pic 字段
   if (el.wordPic) {
-    const pic = word.pic || `https://picsum.photos/seed/${encodeURIComponent(word.char)}/400/300`;
+    const firstWord = cizuParts[0] || word.char;
+    const pic = `https://picsum.photos/seed/${encodeURIComponent(firstWord)}/400/300`;
     el.wordPic.src = pic;
-    el.wordPic.alt = word.char;
+    el.wordPic.alt = firstWord;
   }
 
-  // 清除边界提示
   el.card.classList.remove('boundary-next', 'boundary-prev');
   if (el.bgHint) {
     el.bgHint.classList.remove('show-next', 'show-prev');
@@ -176,7 +173,6 @@ function showRandomPonyQuote() {
   el.ponyQuotes.textContent = PONY_QUOTES[Math.floor(Math.random() * PONY_QUOTES.length)];
 }
 
-// -------- 动作 --------
 function markWordShown(word) {
   const info = state.words[word.char] || { level: 0, lastShown: null, timesShown: 0 };
   info.timesShown = (info.timesShown || 0) + 1;
@@ -244,7 +240,6 @@ function goPrevGroup() {
   animateFlyIn();
 }
 
-// -------- 滑动事件 --------
 let dragging = false;
 let pointerStartX = 0;
 let boundaryShown = null;
@@ -323,7 +318,6 @@ window.addEventListener('mousemove', (e) => {
 });
 window.addEventListener('mouseup', onPointerUp);
 
-// 键盘
 document.addEventListener('keydown', (e) => {
   if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') {
     if (e.key === 'ArrowLeft') {
@@ -336,5 +330,4 @@ document.addEventListener('keydown', (e) => {
   }
 });
 
-// -------- 启动 --------
 renderCurrent();
