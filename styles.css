@@ -65,14 +65,13 @@ html, body {
 .title h1 {
   margin: 0;
   font-size: 32px;
-  font-weight: 500;
+  font-weight: 700;
   letter-spacing: 6px;
   background: linear-gradient(135deg, #ff4fa3 0%, #9b4de0 40%, #4a8bff 100%);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
-  font-family: "华文行楷", "STXingkai", "华文楷体", "STKaiti", "楷体", "KaiTi", "STKaiti", "Segoe Script", cursive;
-  text-shadow: 0 2px 8px rgba(255, 79, 163, 0.15);
+  font-family: "PingFang SC", "苹方-简", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
 }
 
 .sparkle {
@@ -149,7 +148,7 @@ html, body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 12px;
+  gap: 8px;
   min-height: 0;
 }
 
@@ -259,9 +258,9 @@ html, body {
   100% { transform: scale(1); opacity: 1; }
 }
 
-/* 组词 — 去掉边框，直接显示 */
+/* 组词 — 去掉边框，直接显示，苹方简体 */
 .cizu-text {
-  font-family: "KaiTi", "楷体", "STKaiti", serif;
+  font-family: "PingFang SC", "苹方-简", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
   font-size: 24px;
   color: #4a2860;
   text-align: center;
@@ -298,17 +297,6 @@ html, body {
 .card-bg-hint .bg-arrow { font-size: 48px; }
 .card-bg-hint .bg-title { font-size: 20px; }
 .card-bg-hint .bg-sub { font-size: 13px; opacity: 0.7; }
-
-/* 小马鼓励语 */
-.pony-quotes {
-  margin-top: 10px;
-  font-size: 13px;
-  color: #9b4de0;
-  text-align: center;
-  min-height: 18px;
-  font-weight: 600;
-  letter-spacing: 2px;
-}
 
 /* -------- 底部进度条 -------- */
 .bottom-bar {

@@ -5,15 +5,6 @@ const STORAGE_KEY = 'pony-literacy-v3';
 const REVIEW_INTERVALS = [1, 3, 7, 14, 30];
 const SWIPE_THRESHOLD = 80;
 
-const PONY_QUOTES = [
-  '✨ 真棒，继续加油！',
-  '🌈 又认识一个字！',
-  '🦄 你学得真快~',
-  '⭐ 这个字也认识啦！',
-  '💖 每天都在进步！',
-  '🌟 你是识字小能手~',
-];
-
 function defaultState() {
   return { groupIndex: 0, words: {}, lastStudyDate: null, streak: 0, history: [] };
 }
@@ -67,7 +58,6 @@ const el = {
   progressFill: document.getElementById('progressFill'),
   sessionProgress: document.getElementById('sessionProgress'),
   dayLabel: document.getElementById('dayLabel'),
-  ponyQuotes: document.getElementById('ponyQuotes'),
 };
 
 function renderWordContent(word) {
@@ -77,7 +67,7 @@ function renderWordContent(word) {
   const cizuRaw = (word.example || '').replace(/^组词[：:]?\s*/, '').trim();
   const cizuParts = cizuRaw.split(/[、,，]/).map(s => s.trim()).filter(s => s);
   if (cizuParts.length >= 1) {
-    el.cizu.textContent = '组词：' + cizuParts.slice(0, 3).join('　');
+    el.cizu.textContent = cizuParts.slice(0, 3).join('  ');
   } else {
     el.cizu.textContent = word.char;
   }
@@ -122,7 +112,6 @@ function renderCurrent() {
   if (!currentQueue.length) return;
   renderWordContent(currentQueue[currentIdx]);
   updateProgress();
-  showRandomPonyQuote();
 }
 
 function animateFlyIn() {
@@ -136,10 +125,6 @@ function updateProgress() {
   el.progressFill.style.width = Math.round((done / total) * 100) + '%';
   el.sessionProgress.textContent = `${done} / ${total}`;
   el.dayLabel.textContent = `第 ${state.groupIndex + 1} 组`;
-}
-
-function showRandomPonyQuote() {
-  el.ponyQuotes.textContent = PONY_QUOTES[Math.floor(Math.random() * PONY_QUOTES.length)];
 }
 
 function markWordShown(word) {
