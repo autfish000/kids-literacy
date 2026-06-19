@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>小马识字乐园</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app">
+    <header class="top-bar">
+      <div class="title">
+        <span class="sparkle">✦</span>
+        <h1>小马识字乐园</h1>
+        <span class="sparkle">✦</span>
+      </div>
+      <div class="progress-wrap">
+        <div class="progress-label">
+          <span id="dayLabel">第 1 组</span>
+          <span id="sessionProgress">0 / 5</span>
+        </div>
+        <div class="progress-bar">
+          <div id="progressFill" class="progress-fill"></div>
+        </div>
+      </div>
+    </header>
+
+    <main class="stage">
+      <div id="cardStack" class="card-stack">
+        <div id="card" class="card">
+          <div class="card-inner">
+            <div class="pinyin-row">
+              <span class="pinyin" id="pinyin">pīn yīn</span>
+              <span class="review-tag" id="reviewTag">⭐ 复习</span>
+            </div>
+            <div class="tianzi">
+              <div class="tianzi-grid">
+                <div class="hanzi" id="hanzi">字</div>
+              </div>
+            </div>
+            <div class="meaning" id="meaning">组词</div>
+          </div>
+        </div>
+        <div class="card-bg-hint" id="cardBgHint"></div>
+      </div>
+
+      <div class="pony-quotes" id="ponyQuotes"></div>
+    </main>
+
+    <button id="btnStats" class="floating-btn" title="学习进度">📊</button>
+
+    <div id="statsPanel" class="panel hidden">
+      <div class="panel-inner">
+        <h2>学习进度</h2>
+        <div class="stats-grid">
+          <div class="stat-card"><div class="stat-num" id="statTotal">0</div><div class="stat-label">认识的字</div></div>
+          <div class="stat-card"><div class="stat-num" id="statDays">0</div><div class="stat-label">学习天数</div></div>
+          <div class="stat-card"><div class="stat-num" id="statStreak">0</div><div class="stat-label">连续打卡</div></div>
+          <div class="stat-card"><div class="stat-num" id="statGroup">1</div><div class="stat-label">当前组</div></div>
+        </div>
+        <h3>最近学的字</h3>
+        <div id="recentWords" class="recent-words"></div>
+        <div class="panel-btns">
+          <button id="btnCloseStats" class="tab-btn active">关闭</button>
+          <button id="btnReset" class="tab-btn danger">重新开始</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="words.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
