@@ -66,7 +66,6 @@ const el = {
   hanzi: document.getElementById('hanzi'),
   bihui: document.getElementById('bihui'),
   cizu1: document.getElementById('cizu1'),
-  cizu2: document.getElementById('cizu2'),
   zaoju: document.getElementById('zaoju'),
   wordPic: document.getElementById('wordPic'),
   progressFill: document.getElementById('progressFill'),
@@ -90,19 +89,16 @@ function renderWordContent(word) {
   
   if (cizuParts.length >= 3) {
     el.cizu1.textContent = cizuParts.slice(0, 3).join(' ');
-    el.cizu2.textContent = `${cizuParts[0]}是一种漂亮的${word.char}。`;
   } else if (cizuParts.length >= 1) {
     el.cizu1.textContent = cizuParts.join(' ');
-    el.cizu2.textContent = `${cizuParts[0]}是一种漂亮的${word.char}。`;
   } else {
     el.cizu1.textContent = word.char;
-    el.cizu2.textContent = `${word.char}是一个常用汉字。`;
   }
 
   let sentence = (word.sentence && word.sentence.trim()) || '';
   if (!sentence) {
     const firstWord = cizuParts[0] || word.char;
-    sentence = `雨花${word.char}是一种漂亮的${word.char}头。`;
+    sentence = `我喜欢${firstWord}。`;
   }
   el.zaoju.textContent = sentence;
 
