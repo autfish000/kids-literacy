@@ -12,6 +12,7 @@ Page({
   data: {
     currentWord: {},
     cizuText: '',
+    cizuWords: ['', '', ''],
     groupIndex: 0,
     currentQueue: [],
     currentIdx: 0,
@@ -105,6 +106,7 @@ Page({
     const raw = (word.example || '').replace(/^组词[：:]?\s*/, '').trim()
     const parts = raw.split(/[、,，]/).map(s => s.trim()).filter(s => s)
     const cizuText = parts.length >= 1 ? parts.slice(0, 3).join('  ') : word.char
+    const cizuWords = parts.length >= 1 ? parts.slice(0, 3) : [word.char, '', '']
 
     const done = currentIdx + 1
     const total = Math.max(currentQueue.length, 1)
@@ -113,6 +115,7 @@ Page({
     this.setData({
       currentWord: { char: word.char || '', pinyin: word.pinyin || '' },
       cizuText,
+      cizuWords,
       progressPercent,
       boundaryDir: '',
       cardTransform: '',

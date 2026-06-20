@@ -12,7 +12,7 @@
   <view class="stage">
     <view class="card-stack">
       <view
-        class="card {{boundaryDir === 'next' ? 'boundary-next' : ''}} {{boundaryDir === 'prev' ? 'boundary-prev' : ''}}"
+        class="card"
         style="transform: {{cardTransform}}; {{cardStyle}}"
         bindtouchstart="onTouchStart"
         bindtouchmove="onTouchMove"
@@ -28,8 +28,12 @@
           </view>
         </view>
 
-        <!-- 组词 -->
-        <view class="cizu-text">{{cizuText}}</view>
+        <!-- 组词：左对齐 | 居中 | 右对齐 -->
+        <view class="cizu-row">
+          <text class="cizu-word cizu-left">{{cizuWords[0]}}</text>
+          <text class="cizu-word cizu-center">{{cizuWords[1]}}</text>
+          <text class="cizu-word cizu-right">{{cizuWords[2]}}</text>
+        </view>
 
         <!-- 边界提示 -->
         <view class="card-bg-hint" wx:if="{{boundaryDir === 'next' || boundaryDir === 'prev'}}">
