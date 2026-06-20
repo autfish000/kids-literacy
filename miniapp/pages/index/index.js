@@ -113,7 +113,7 @@ Page({
     const progressPercent = Math.round((done / total) * 100)
 
     this.setData({
-      currentWord: { char: word.char || '', pinyin: word.pinyin || '' },
+      currentWord: { char: word.char || '', pinyin: word.pinyin || '', sentenceText: word.sentenceText || '' },
       cizuText,
       cizuWords,
       progressPercent,

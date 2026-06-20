@@ -55,6 +55,7 @@ const el = {
   pinyinBox: document.getElementById('pinyinBox'),
   hanzi: document.getElementById('hanzi'),
   cizu: document.getElementById('cizu'),
+  pageTitle: document.getElementById('pageTitle'),
   progressFill: document.getElementById('progressFill'),
   sessionProgress: document.getElementById('sessionProgress'),
   dayLabel: document.getElementById('dayLabel'),
@@ -63,6 +64,11 @@ const el = {
 function renderWordContent(word) {
   el.pinyinBox.textContent = word.pinyin || '';
   el.hanzi.textContent = word.char || '';
+
+  // 造句显示到顶部标题
+  if (el.pageTitle && word.sentenceText) {
+    el.pageTitle.textContent = word.sentenceText;
+  }
 
   const cizuRaw = (word.example || '').replace(/^组词[：:]?\s*/, '').trim();
   const cizuParts = cizuRaw.split(/[、,，]/).map(s => s.trim()).filter(s => s);

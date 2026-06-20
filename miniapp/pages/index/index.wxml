@@ -1,9 +1,9 @@
 <view class="app">
   <!-- 卡片区域：标题 + 卡片 + 进度条 -->
   <view class="content-area">
-    <!-- 页面标题 -->
+    <!-- 页面标题：用第一个组词造句 -->
     <view class="page-title">
-      <text class="title-text">{{cizuWords[0]}}加油！你超棒的！</text>
+      <text class="title-text">{{currentWord.sentenceText}}</text>
     </view>
 
     <!-- 识字卡片 -->
