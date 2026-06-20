@@ -45,11 +45,12 @@ html, body {
   width: 100vw;
   margin: 0 auto;
   overflow: hidden;
+  gap: 50px;
 }
 
 /* -------- 顶部标题 · 文艺体 -------- */
 .top-bar {
-  padding: 12px 20px 50px;
+  padding: 20px 20px 0;
   text-align: center;
   z-index: 5;
   flex-shrink: 0;
@@ -303,7 +304,7 @@ html, body {
 
 /* -------- 底部进度条 -------- */
 .bottom-bar {
-  padding: 50px 20px 18px;
+  padding: 0 20px 20px;
   z-index: 5;
   flex-shrink: 0;
 }
