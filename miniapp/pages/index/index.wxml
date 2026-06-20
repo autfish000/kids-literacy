@@ -9,7 +9,9 @@
     <!-- 识字卡片 -->
     <view class="card">
       <!-- 拼音格 -->
-      <view class="pinyin-box">{{currentWord.pinyin}}</view>
+      <view class="pinyin-box">
+        <text class="pinyin-text">{{currentWord.pinyin}}</text>
+      </view>
 
       <!-- 田字格 -->
       <view class="tianzi">
