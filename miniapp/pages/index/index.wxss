@@ -38,7 +38,7 @@ page::after {
   align-items: center;
   justify-content: center;
   height: 100vh;
-  padding: 60rpx 0;
+  padding: 60rpx 50px;
   box-sizing: border-box;
 }
 
