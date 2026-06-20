@@ -20,9 +20,9 @@
 
       <!-- 组词 -->
       <view class="cizu-row">
-        <text class="cizu-word cizu-left">{{cizuWords[0]}}</text>
-        <text class="cizu-word cizu-center">{{cizuWords[1]}}</text>
-        <text class="cizu-word cizu-right">{{cizuWords[2]}}</text>
+        <view class="cizu-item"><text class="cizu-word">{{cizuWords[0]}}</text></view>
+        <view class="cizu-item"><text class="cizu-word">{{cizuWords[1]}}</text></view>
+        <view class="cizu-item"><text class="cizu-word">{{cizuWords[2]}}</text></view>
       </view>
 
       <!-- 滑动触发区 + 边界提示 -->
