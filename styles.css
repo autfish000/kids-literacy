@@ -39,21 +39,21 @@ html, body {
 
 .app {
   position: relative;
-  display: flex;
-  flex-direction: column;
   height: 100vh;
   width: 100vw;
   margin: 0 auto;
   overflow: hidden;
-  gap: 50px;
 }
 
-/* -------- 顶部标题 · 文艺体 -------- */
+/* -------- 顶部标题 · 卡通字体 -------- */
 .top-bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
   padding: 20px 20px 0;
   text-align: center;
   z-index: 5;
-  flex-shrink: 0;
 }
 
 .title {
@@ -72,7 +72,7 @@ html, body {
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
-  font-family: "Hiragino Maru Gothic ProN", "Yuanti SC", "华文圆体", "幼圆", "Microsoft YaHei", "PingFang SC", sans-serif;
+  font-family: "Comic Sans MS", "KaiTi", "楷体", "STKaiti", "Hiragino Maru Gothic ProN", "华文圆体", cursive, sans-serif;
 }
 
 .sparkle {
@@ -92,15 +92,17 @@ html, body {
 }
 
 .stage {
-  flex: 1;
-  position: relative;
+  position: absolute;
+  top: 64px;
+  left: 0;
+  right: 0;
+  bottom: 100px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 0 20px;
+  padding: 50px 20px;
   z-index: 2;
-  min-height: 0;
 }
 
 .card-stack {
@@ -108,7 +110,7 @@ html, body {
   width: 100%;
   max-width: 380px;
   height: 100%;
-  max-height: 480px;
+  max-height: 520px;
   perspective: 1200px;
 }
 
@@ -131,6 +133,7 @@ html, body {
   transition: transform 0.3s ease, opacity 0.3s ease;
   touch-action: none;
   z-index: 2;
+  max-height: inherit;
 }
 
 .card:active { cursor: grabbing; }
@@ -304,9 +307,12 @@ html, body {
 
 /* -------- 底部进度条 -------- */
 .bottom-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
   padding: 0 20px 20px;
   z-index: 5;
-  flex-shrink: 0;
 }
 
 .progress-wrap {
@@ -371,7 +377,7 @@ html, body {
   .pinyin-box { font-size: 24px; }
   .cizu-text { font-size: 18px; }
   .title h1 { font-size: 28px; letter-spacing: 4px; }
-  .card-stack { max-height: 440px; }
+  .stage { top: 58px; }
 }
 
 @media (max-height: 580px) {
@@ -381,7 +387,7 @@ html, body {
   .card { padding: 10px 30px 8px; }
   .card-inner { gap: 12px; }
   .title h1 { font-size: 22px; letter-spacing: 3px; }
-  .card-stack { max-height: 400px; }
+  .stage { top: 52px; }
 }
 
 @media (max-width: 400px) {
