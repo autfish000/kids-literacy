@@ -48,7 +48,7 @@ page::after {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 0 40rpx 30px 40rpx;
+  margin: 0 20px 30px 20px;
   padding: 20rpx 32rpx;
   background: linear-gradient(135deg, #ffeef7 0%, #f5e6ff 100%);
   border-radius: 24rpx;
@@ -113,7 +113,7 @@ page::after {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 50px 30px 0 30px;
+  margin: 50px 20px 0 20px;
   padding: 0;
 }
 
@@ -130,7 +130,7 @@ page::after {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 34rpx 30px 0 30px;
+  margin: 34rpx 20px 0 20px;
 }
 
 .tianzi-grid {
@@ -189,7 +189,7 @@ page::after {
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  margin: 34rpx 30px 50px 30px;
+  margin: 34rpx 20px 50px 20px;
   gap: 16rpx;
 }
 

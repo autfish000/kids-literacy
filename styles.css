@@ -61,7 +61,7 @@ html, body {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 0 40px 30px 40px;
+  margin: 0 20px 30px 20px;
   padding: 16px 28px;
   background: linear-gradient(135deg, #ffeef7 0%, #f5e6ff 100%);
   border-radius: 24px;
@@ -162,7 +162,7 @@ html, body {
   border: none;
   display: flex;
   flex-direction: column;
-  padding: 14px 30px 12px;
+  padding: 14px 20px 12px;
   cursor: grab;
   transition: transform 0.3s ease, opacity 0.3s ease;
   touch-action: none;
@@ -418,7 +418,7 @@ html, body {
   .hanzi { font-size: clamp(60px, 50vw, 140px); }
   .pinyin-box { font-size: 22px; padding: 6px 14px; }
   .cizu-text { font-size: 16px; letter-spacing: 2px; }
-  .card { padding: 10px 30px 8px; }
+  .card { padding: 10px 20px 8px; }
   .card-inner { gap: 12px; }
   .title h1 { font-size: 22px; letter-spacing: 3px; }
   .stage { top: 52px; }
