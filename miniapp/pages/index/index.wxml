@@ -1,8 +1,8 @@
 <view class="app">
   <!-- 卡片区域：标题 + 卡片 + 进度条 -->
   <view class="content-area">
-    <!-- 页面标题：用第一个组词造句 -->
-    <view class="page-title">
+    <!-- 页面标题：用第一个组词造句，独角兽聊天气泡 -->
+    <view class="chat-bubble">
       <text class="title-text">🦄 {{currentWord.sentenceText}}</text>
     </view>
 

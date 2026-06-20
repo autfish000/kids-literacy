@@ -56,23 +56,57 @@ html, body {
   z-index: 5;
 }
 
-.title {
+/* ===================== 独角兽聊天气泡 ===================== */
+.chat-bubble {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 8px;
+  margin: 0 40px 30px 40px;
+  padding: 16px 28px;
+  background: linear-gradient(135deg, #ffeef7 0%, #f5e6ff 100%);
+  border-radius: 24px;
+  border: 2px solid rgba(155, 77, 224, 0.2);
+  position: relative;
+  box-shadow: 0 4px 16px rgba(155, 77, 224, 0.1);
 }
 
-.title h1 {
+.chat-bubble::after {
+  content: "";
+  position: absolute;
+  bottom: -16px;
+  left: 44px;
+  width: 0;
+  height: 0;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-top: 16px solid #f5e6ff;
+}
+
+.chat-bubble::before {
+  content: "";
+  position: absolute;
+  bottom: -20px;
+  left: 42px;
+  width: 0;
+  height: 0;
+  border-left: 12px solid transparent;
+  border-right: 12px solid transparent;
+  border-top: 18px solid rgba(155, 77, 224, 0.15);
+  z-index: -1;
+}
+
+.chat-bubble h1 {
   margin: 0;
   font-size: 32px;
-  font-weight: 700;
-  letter-spacing: 6px;
-  background: linear-gradient(135deg, #ff4fa3 0%, #9b4de0 40%, #4a8bff 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  font-family: "Comic Sans MS", "KaiTi", "楷体", "STKaiti", "Hiragino Maru Gothic ProN", "华文圆体", cursive, sans-serif;
+  font-weight: 600;
+  letter-spacing: 4px;
+  color: #7b3dc0;
+  font-family: "KaiTi", "楷体", "STKaiti", "华文楷体", serif;
+  text-align: center;
+  line-height: 1.6;
+  background: none;
+  -webkit-background-clip: unset;
+  background-clip: unset;
 }
 
 .sparkle {

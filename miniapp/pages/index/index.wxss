@@ -43,19 +43,54 @@ page::after {
 }
 
 /* ===================== 页面标题 ===================== */
-.page-title {
+/* ===================== 独角兽聊天气泡 ===================== */
+.chat-bubble {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-bottom: 30px;
+  margin: 0 40rpx 30px 40rpx;
+  padding: 20rpx 32rpx;
+  background: linear-gradient(135deg, #ffeef7 0%, #f5e6ff 100%);
+  border-radius: 24rpx;
+  border: 3rpx solid rgba(155, 77, 224, 0.2);
+  position: relative;
+  box-shadow: 0 4rpx 16rpx rgba(155, 77, 224, 0.1);
+}
+
+/* 气泡小尾巴，在下方左边 */
+.chat-bubble::after {
+  content: "";
+  position: absolute;
+  bottom: -18rpx;
+  left: 48rpx;
+  width: 0;
+  height: 0;
+  border-left: 12rpx solid transparent;
+  border-right: 12rpx solid transparent;
+  border-top: 18rpx solid #f5e6ff;
+}
+
+.chat-bubble::before {
+  content: "";
+  position: absolute;
+  bottom: -22rpx;
+  left: 46rpx;
+  width: 0;
+  height: 0;
+  border-left: 14rpx solid transparent;
+  border-right: 14rpx solid transparent;
+  border-top: 20rpx solid rgba(155, 77, 224, 0.15);
+  z-index: -1;
 }
 
 .title-text {
   font-size: 36rpx;
   font-weight: 600;
   letter-spacing: 4rpx;
-  color: #9b4de0;
+  color: #7b3dc0;
   font-family: "KaiTi", "楷体", "STKaiti", "华文楷体", serif;
+  text-align: center;
+  line-height: 1.6;
 }
 
 /* ===================== 识字卡片 ===================== */
