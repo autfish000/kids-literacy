@@ -105,9 +105,9 @@ html, body {
 .card-stack {
   position: relative;
   width: 100%;
-  max-width: 400px;
+  max-width: 380px;
   height: 100%;
-  max-height: 600px;
+  max-height: 480px;
   perspective: 1200px;
 }
 
@@ -117,15 +117,15 @@ html, body {
   background:
     radial-gradient(ellipse at 50% 0%, #fff0f7 0%, transparent 50%),
     linear-gradient(180deg, #fffafc 0%, #fdf2ff 100%);
-  border-radius: 28px;
+  border-radius: 24px;
   box-shadow:
-    0 8px 28px rgba(155, 77, 224, 0.18),
-    0 2px 6px rgba(255, 79, 163, 0.12),
-    inset 0 0 40px rgba(255, 159, 199, 0.12);
+    0 6px 20px rgba(155, 77, 224, 0.18),
+    0 2px 4px rgba(255, 79, 163, 0.12),
+    inset 0 0 30px rgba(255, 159, 199, 0.12);
   border: none;
   display: flex;
   flex-direction: column;
-  padding: 22px 20px 18px;
+  padding: 14px 16px 12px;
   cursor: grab;
   transition: transform 0.3s ease, opacity 0.3s ease;
   touch-action: none;
@@ -156,30 +156,30 @@ html, body {
 .pinyin-box { margin-bottom: 0; }
 .tianzi { flex: 0 0 auto; margin: 0; }
 
-/* -------- 拼音格 + 田字格 统一宽度（加宽）-------- */
+/* -------- 拼音格 + 田字格 统一宽度 -------- */
 .tianzi-grid,
 .pinyin-box {
-  width: 300px;
+  width: 240px;
 }
 
-/* 拼音格 — Roboto，加宽 */
+/* 拼音格 — Roboto，压缩高度 */
 .pinyin-box {
   background: #ffffff;
   border: 2px solid var(--tianzi-color);
-  border-radius: 16px;
-  padding: 14px 20px;
+  border-radius: 14px;
+  padding: 8px 16px;
   text-align: center;
-  font-size: 36px;
+  font-size: 28px;
   font-weight: 500;
   color: #9b4de0;
-  letter-spacing: 6px;
+  letter-spacing: 4px;
   font-family: "Roboto", sans-serif;
   position: relative;
-  min-height: 68px;
+  min-height: 52px;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 2px 10px rgba(255, 79, 163, 0.12);
+  box-shadow: 0 2px 8px rgba(255, 79, 163, 0.12);
   margin: 0 auto;
 }
 
@@ -208,14 +208,14 @@ html, body {
 
 .tianzi-grid {
   position: relative;
-  height: 300px;
+  height: 220px;
   background: #ffffff;
   border: 2px solid var(--tianzi-color);
   border-radius: 8px;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 4px 16px rgba(255, 79, 163, 0.15);
+  box-shadow: 0 3px 12px rgba(255, 79, 163, 0.15);
   margin: 0 auto;
 }
 
@@ -239,7 +239,7 @@ html, body {
   margin-left: 0.5px;
 }
 
-/* 汉字 — 楷体，加大 */
+/* 汉字 — 楷体 */
 .hanzi {
   position: absolute;
   inset: 0;
@@ -248,7 +248,7 @@ html, body {
   justify-content: center;
   font-family: "KaiTi", "楷体", "STKaiti", "华文楷体", serif;
   font-weight: 400;
-  font-size: 200px;
+  font-size: 160px;
   color: #3a1f5c;
   margin: 0;
   animation: pop 0.6s ease-out;
@@ -262,15 +262,15 @@ html, body {
   100% { transform: scale(1); opacity: 1; }
 }
 
-/* 组词 — 去掉边框，直接显示，苹方简体 */
+/* 组词 — 去掉边框，直接显示，苹方简体，压缩字号 */
 .cizu-text {
   font-family: "PingFang SC", "苹方-简", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
-  font-size: 24px;
+  font-size: 20px;
   color: #4a2860;
   text-align: center;
-  letter-spacing: 4px;
+  letter-spacing: 3px;
   font-weight: 600;
-  padding: 4px 10px;
+  padding: 2px 8px;
 }
 
 /* 边界提示 */
@@ -367,27 +367,29 @@ html, body {
 
 /* 响应式 */
 @media (max-height: 680px) {
-  .tianzi-grid, .pinyin-box { width: 260px; }
-  .tianzi-grid { height: 260px; }
-  .hanzi { font-size: 170px; }
-  .pinyin-box { font-size: 32px; }
-  .cizu-text { font-size: 22px; }
-  .title h1 { font-size: 28px; }
+  .tianzi-grid, .pinyin-box { width: 220px; }
+  .tianzi-grid { height: 200px; }
+  .hanzi { font-size: 140px; }
+  .pinyin-box { font-size: 24px; min-height: 48px; }
+  .cizu-text { font-size: 18px; }
+  .title h1 { font-size: 28px; letter-spacing: 4px; }
+  .card-stack { max-height: 440px; }
 }
 
 @media (max-height: 580px) {
-  .tianzi-grid, .pinyin-box { width: 220px; }
-  .tianzi-grid { height: 220px; }
-  .hanzi { font-size: 140px; }
-  .pinyin-box { font-size: 28px; padding: 10px 16px; min-height: 60px; }
-  .cizu-text { font-size: 20px; letter-spacing: 3px; }
-  .card { padding: 16px 18px 12px; }
-  .card-inner { gap: 10px; }
-  .title h1 { font-size: 24px; letter-spacing: 4px; }
+  .tianzi-grid, .pinyin-box { width: 200px; }
+  .tianzi-grid { height: 180px; }
+  .hanzi { font-size: 120px; }
+  .pinyin-box { font-size: 22px; padding: 6px 14px; min-height: 44px; }
+  .cizu-text { font-size: 16px; letter-spacing: 2px; }
+  .card { padding: 10px 14px 8px; }
+  .card-inner { gap: 2px; }
+  .title h1 { font-size: 22px; letter-spacing: 3px; }
+  .card-stack { max-height: 400px; }
 }
 
 @media (max-width: 400px) {
-  .tianzi-grid, .pinyin-box { width: 260px; }
-  .tianzi-grid { height: 260px; }
-  .hanzi { font-size: 170px; }
+  .tianzi-grid, .pinyin-box { width: 220px; }
+  .tianzi-grid { height: 200px; }
+  .hanzi { font-size: 140px; }
 }
