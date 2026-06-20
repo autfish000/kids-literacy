@@ -196,6 +196,8 @@ page::after {
   line-height: 1;
   position: relative;
   z-index: 2;
+  transform: scale(0.8);
+  transform-origin: center center;
 }
 
 /* ===================== 组词 ===================== */
