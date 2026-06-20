@@ -1,0 +1,58 @@
+<view class="app">
+  <!-- 顶部标题 -->
+  <view class="top-bar">
+    <view class="title">
+      <text class="sparkle">✦</text>
+      <text class="title-text">小马识字乐园</text>
+      <text class="sparkle">✦</text>
+    </view>
+  </view>
+
+  <!-- 识字卡片区域 -->
+  <view class="stage">
+    <view class="card-stack">
+      <view
+        class="card {{boundaryDir === 'next' ? 'boundary-next' : ''}} {{boundaryDir === 'prev' ? 'boundary-prev' : ''}}"
+        style="transform: {{cardTransform}}; {{cardStyle}}"
+        bindtouchstart="onTouchStart"
+        bindtouchmove="onTouchMove"
+        bindtouchend="onTouchEnd"
+      >
+        <!-- 拼音格 -->
+        <view class="pinyin-box">{{currentWord.pinyin}}</view>
+
+        <!-- 田字格 -->
+        <view class="tianzi">
+          <view class="tianzi-grid">
+            <text class="hanzi">{{currentWord.char}}</text>
+          </view>
+        </view>
+
+        <!-- 组词 -->
+        <view class="cizu-text">{{cizuText}}</view>
+
+        <!-- 边界提示 -->
+        <view class="card-bg-hint" wx:if="{{boundaryDir === 'next' || boundaryDir === 'prev'}}">
+          <text class="bg-arrow">{{boundaryDir === 'next' ? '👉' : '👈'}}</text>
+          <text class="bg-title">{{boundaryDir === 'next' ? '进入下一组' : '回到上一组'}}</text>
+          <text class="bg-sub">{{boundaryDir === 'next' ? '继续向左滑，开启全新5个字' : '继续向右滑，再学一遍'}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 底部进度条 -->
+  <view class="bottom-bar">
+    <view class="progress-wrap">
+      <view class="progress-label">
+        <text>第 {{groupIndex + 1}} 组</text>
+        <text>{{currentIdx + 1}} / {{currentQueue.length}}</text>
+      </view>
+      <view class="progress-bar">
+        <view class="progress-fill" style="width: {{progressPercent}}%;">
+          <text class="progress-unicorn">🦄</text>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,4 @@
+/* 全局样式 */
+page {
+  background: linear-gradient(160deg, #fff5fa 0%, #fbeaff 50%, #eef5ff 100%);
+}
