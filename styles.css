@@ -193,13 +193,12 @@ html, body {
 .pinyin-box::before { top: 33%; }
 .pinyin-box::after  { top: 66%; }
 
-/* 田字格 — 加宽 */
+/* 田字格 — 不再拉伸填充 */
 .tianzi {
-  flex: 1;
+  flex: 0 0 auto;
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 0;
   width: 100%;
 }
 
