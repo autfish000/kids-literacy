@@ -1,52 +1,44 @@
 <view class="app">
-  <!-- 顶部标题 -->
-  <view class="top-bar">
-    <view class="title">
-      <text class="sparkle">✦</text>
+  <!-- 卡片区域：标题 + 卡片 + 进度条 -->
+  <view class="content-area">
+    <!-- 页面标题 -->
+    <view class="page-title">
       <text class="title-text">小马识字乐园</text>
-      <text class="sparkle">✦</text>
     </view>
-  </view>
 
-  <!-- 识字卡片区域 -->
-  <view class="stage">
-    <view class="card-stack">
-      <view
-        class="card"
-        style="transform: {{cardTransform}}; {{cardStyle}}"
+    <!-- 识字卡片 -->
+    <view class="card">
+      <!-- 拼音格 -->
+      <view class="pinyin-box">{{currentWord.pinyin}}</view>
+
+      <!-- 田字格 -->
+      <view class="tianzi">
+        <view class="tianzi-grid">
+          <text class="hanzi">{{currentWord.char}}</text>
+        </view>
+      </view>
+
+      <!-- 组词 -->
+      <view class="cizu-row">
+        <text class="cizu-word cizu-left">{{cizuWords[0]}}</text>
+        <text class="cizu-word cizu-center">{{cizuWords[1]}}</text>
+        <text class="cizu-word cizu-right">{{cizuWords[2]}}</text>
+      </view>
+
+      <!-- 滑动触发区 + 边界提示 -->
+      <view class="card-overlay"
         bindtouchstart="onTouchStart"
         bindtouchmove="onTouchMove"
         bindtouchend="onTouchEnd"
-      >
-        <!-- 拼音格 -->
-        <view class="pinyin-box">{{currentWord.pinyin}}</view>
-
-        <!-- 田字格 -->
-        <view class="tianzi">
-          <view class="tianzi-grid">
-            <text class="hanzi">{{currentWord.char}}</text>
-          </view>
-        </view>
-
-        <!-- 组词：左对齐 | 居中 | 右对齐 -->
-        <view class="cizu-row">
-          <text class="cizu-word cizu-left">{{cizuWords[0]}}</text>
-          <text class="cizu-word cizu-center">{{cizuWords[1]}}</text>
-          <text class="cizu-word cizu-right">{{cizuWords[2]}}</text>
-        </view>
-
-        <!-- 边界提示 -->
-        <view class="card-bg-hint" wx:if="{{boundaryDir === 'next' || boundaryDir === 'prev'}}">
-          <text class="bg-arrow">{{boundaryDir === 'next' ? '👉' : '👈'}}</text>
-          <text class="bg-title">{{boundaryDir === 'next' ? '进入下一组' : '回到上一组'}}</text>
-          <text class="bg-sub">{{boundaryDir === 'next' ? '继续向左滑，开启全新5个字' : '继续向右滑，再学一遍'}}</text>
-        </view>
+      ></view>
+      <view class="card-bg-hint" wx:if="{{boundaryDir === 'next' || boundaryDir === 'prev'}}">
+        <text class="bg-arrow">{{boundaryDir === 'next' ? '👉' : '👈'}}</text>
+        <text class="bg-title">{{boundaryDir === 'next' ? '进入下一组' : '回到上一组'}}</text>
+        <text class="bg-sub">{{boundaryDir === 'next' ? '继续向左滑，开启全新5个字' : '继续向右滑，再学一遍'}}</text>
       </view>
     </view>
-  </view>
 
-  <!-- 底部进度条 -->
-  <view class="bottom-bar">
+    <!-- 底部进度条 -->
     <view class="progress-wrap">
       <view class="progress-label">
         <text>第 {{groupIndex + 1}} 组</text>
