@@ -43,26 +43,40 @@ page::after {
 }
 
 /* ===================== 页面标题 ===================== */
-/* ===================== 独角兽聊天气泡 ===================== */
+/* ===================== 独角兽 + 聊天气泡 ===================== */
+.bubble-row {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  margin: 0 20px 30px 20px;
+  gap: 0;
+}
+
+.bubble-emoji {
+  font-size: 48rpx;
+  line-height: 1;
+  flex-shrink: 0;
+  margin-bottom: 4rpx;
+}
+
 .chat-bubble {
   display: flex;
-  justify-content: center;
   align-items: center;
-  margin: 0 20px 30px 20px;
-  padding: 20rpx 32rpx;
+  padding: 16rpx 28rpx;
   background: linear-gradient(135deg, #ffeef7 0%, #f5e6ff 100%);
-  border-radius: 24rpx;
+  border-radius: 24rpx 0 24rpx 0;
   border: 3rpx solid rgba(155, 77, 224, 0.2);
   position: relative;
   box-shadow: 0 4rpx 16rpx rgba(155, 77, 224, 0.1);
 }
 
-/* 气泡小尾巴，在下方左边 */
+/* 气泡小尾巴，在右下角 */
 .chat-bubble::after {
   content: "";
   position: absolute;
   bottom: -18rpx;
-  left: 48rpx;
+  right: 24rpx;
+  left: auto;
   width: 0;
   height: 0;
   border-left: 12rpx solid transparent;
@@ -74,7 +88,8 @@ page::after {
   content: "";
   position: absolute;
   bottom: -22rpx;
-  left: 46rpx;
+  right: 22rpx;
+  left: auto;
   width: 0;
   height: 0;
   border-left: 14rpx solid transparent;
