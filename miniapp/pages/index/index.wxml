@@ -3,7 +3,7 @@
   <view class="content-area">
     <!-- 页面标题：用第一个组词造句 -->
     <view class="page-title">
-      <text class="title-text">{{currentWord.sentenceText}}</text>
+      <text class="title-text">🦄 {{currentWord.sentenceText}}</text>
     </view>
 
     <!-- 识字卡片 -->

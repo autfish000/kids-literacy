@@ -65,9 +65,9 @@ function renderWordContent(word) {
   el.pinyinBox.textContent = word.pinyin || '';
   el.hanzi.textContent = word.char || '';
 
-  // 造句显示到顶部标题
+  // 造句显示到顶部标题，独角兽领读
   if (el.pageTitle && word.sentenceText) {
-    el.pageTitle.textContent = word.sentenceText;
+    el.pageTitle.textContent = '🦄 ' + word.sentenceText;
   }
 
   const cizuRaw = (word.example || '').replace(/^组词[：:]?\s*/, '').trim();
