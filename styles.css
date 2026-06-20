@@ -125,7 +125,7 @@ html, body {
   border: none;
   display: flex;
   flex-direction: column;
-  padding: 14px 16px 12px;
+  padding: 14px 30px 12px;
   cursor: grab;
   transition: transform 0.3s ease, opacity 0.3s ease;
   touch-action: none;
@@ -151,7 +151,6 @@ html, body {
   justify-content: center;
   gap: 20px;
   min-height: 0;
-  padding: 0 30px;
 }
 
 /* -------- 拼音格 + 田字格 统一宽度（相对卡片边距 30px） -------- */
