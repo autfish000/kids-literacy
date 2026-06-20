@@ -147,17 +147,18 @@ html, body {
   flex: 1;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: stretch;
   justify-content: center;
   gap: 20px;
   min-height: 0;
 }
 
-/* -------- 拼音格 + 田字格 统一宽度（相对卡片边距 30px） -------- */
+/* -------- 拼音格 + 田字格 + 组词：统一拉伸到卡片内容宽度 -------- */
 .tianzi-grid,
-.pinyin-box {
+.pinyin-box,
+.cizu-text {
   width: 100%;
-  max-width: 100%;
+  box-sizing: border-box;
 }
 
 /* 拼音格 — Roboto，高度自适应 */
@@ -376,13 +377,13 @@ html, body {
   .hanzi { font-size: clamp(60px, 50vw, 140px); }
   .pinyin-box { font-size: 22px; padding: 6px 14px; }
   .cizu-text { font-size: 16px; letter-spacing: 2px; }
-  .card { padding: 10px 14px 8px; }
-  .card-inner { gap: 12px; padding: 0 20px; }
+  .card { padding: 10px 30px 8px; }
+  .card-inner { gap: 12px; }
   .title h1 { font-size: 22px; letter-spacing: 3px; }
   .card-stack { max-height: 400px; }
 }
 
 @media (max-width: 400px) {
-  .card-inner { gap: 16px; padding: 0 20px; }
+  .card-inner { gap: 16px; }
   .hanzi { font-size: clamp(60px, 55vw, 150px); }
 }
