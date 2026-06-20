@@ -51,14 +51,14 @@ page::after {
 }
 
 .title-text {
-  font-size: 36px;
-  font-weight: 400;
-  letter-spacing: 6px;
+  font-size: 36rpx;
+  font-weight: 600;
+  letter-spacing: 6rpx;
   background: linear-gradient(135deg, #ff4fa3 0%, #9b4de0 40%, #4a8bff 100%);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
-  font-family: "PingFang SC", "苹方-简", "Hiragino Sans GB", sans-serif;
+  font-family: "KaiTi", "楷体", "STKaiti", "华文楷体", serif;
 }
 
 /* ===================== 识字卡片 ===================== */
