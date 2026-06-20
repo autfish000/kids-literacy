@@ -3,7 +3,7 @@
   <view class="content-area">
     <!-- 页面标题 -->
     <view class="page-title">
-      <text class="title-text">🦄 加 油 ！你 超 棒 的 ！</text>
+      <text class="title-text">{{cizuWords[0]}}加油！你超棒的！</text>
     </view>
 
     <!-- 识字卡片 -->
