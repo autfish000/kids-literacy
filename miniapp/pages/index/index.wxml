@@ -51,7 +51,7 @@
       </view>
       <view class="progress-bar">
         <view class="progress-fill" style="width: {{progressPercent}}%;">
-          <text class="progress-unicorn">🦄</text>
+          <text class="progress-unicorn">🧚‍♀️</text>
         </view>
       </view>
     </view>
