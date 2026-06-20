@@ -149,17 +149,19 @@ html, body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 10px;
+  gap: 20px;
   min-height: 0;
+  padding: 0 30px;
 }
 
-/* -------- 拼音格 + 田字格 统一宽度 -------- */
+/* -------- 拼音格 + 田字格 统一宽度（相对卡片边距 30px） -------- */
 .tianzi-grid,
 .pinyin-box {
-  width: 240px;
+  width: 100%;
+  max-width: 100%;
 }
 
-/* 拼音格 — Roboto，压缩高度 */
+/* 拼音格 — Roboto，高度自适应 */
 .pinyin-box {
   background: #ffffff;
   border: 2px solid var(--tianzi-color);
@@ -172,7 +174,7 @@ html, body {
   letter-spacing: 4px;
   font-family: "Roboto", sans-serif;
   position: relative;
-  min-height: 52px;
+  height: auto;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -204,7 +206,8 @@ html, body {
 
 .tianzi-grid {
   position: relative;
-  height: 220px;
+  aspect-ratio: 1 / 1;
+  width: 100%;
   background: #ffffff;
   border: 2px solid var(--tianzi-color);
   border-radius: 8px;
@@ -235,7 +238,7 @@ html, body {
   margin-left: 0.5px;
 }
 
-/* 汉字 — 楷体 */
+/* 汉字 — 楷体，字号随田字格自适应 */
 .hanzi {
   position: absolute;
   inset: 0;
@@ -244,7 +247,7 @@ html, body {
   justify-content: center;
   font-family: "KaiTi", "楷体", "STKaiti", "华文楷体", serif;
   font-weight: 400;
-  font-size: 160px;
+  font-size: clamp(80px, 60vw, 200px);
   color: #3a1f5c;
   margin: 0;
   animation: pop 0.6s ease-out;
@@ -363,29 +366,24 @@ html, body {
 
 /* 响应式 */
 @media (max-height: 680px) {
-  .tianzi-grid, .pinyin-box { width: 220px; }
-  .tianzi-grid { height: 200px; }
-  .hanzi { font-size: 140px; }
-  .pinyin-box { font-size: 24px; min-height: 48px; }
+  .hanzi { font-size: clamp(70px, 55vw, 160px); }
+  .pinyin-box { font-size: 24px; }
   .cizu-text { font-size: 18px; }
   .title h1 { font-size: 28px; letter-spacing: 4px; }
   .card-stack { max-height: 440px; }
 }
 
 @media (max-height: 580px) {
-  .tianzi-grid, .pinyin-box { width: 200px; }
-  .tianzi-grid { height: 180px; }
-  .hanzi { font-size: 120px; }
-  .pinyin-box { font-size: 22px; padding: 6px 14px; min-height: 44px; }
+  .hanzi { font-size: clamp(60px, 50vw, 140px); }
+  .pinyin-box { font-size: 22px; padding: 6px 14px; }
   .cizu-text { font-size: 16px; letter-spacing: 2px; }
   .card { padding: 10px 14px 8px; }
-  .card-inner { gap: 2px; }
+  .card-inner { gap: 12px; padding: 0 20px; }
   .title h1 { font-size: 22px; letter-spacing: 3px; }
   .card-stack { max-height: 400px; }
 }
 
 @media (max-width: 400px) {
-  .tianzi-grid, .pinyin-box { width: 220px; }
-  .tianzi-grid { height: 200px; }
-  .hanzi { font-size: 140px; }
+  .card-inner { gap: 16px; padding: 0 20px; }
+  .hanzi { font-size: clamp(60px, 55vw, 150px); }
 }
